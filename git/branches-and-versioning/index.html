@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="ru" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Aleksandr Medvedev (oaleksander)" /><link rel="canonical" href="https://woen239.github.io/git/branches-and-versioning/" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Git: Ветки и версионирование - WoEN: Software documentation</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Git: \u0412\u0435\u0442\u043a\u0438 \u0438 \u0432\u0435\u0440\u0441\u0438\u043e\u043d\u0438\u0440\u043e\u0432\u0430\u043d\u0438\u0435";
+        var mkdocs_page_input_path = "git\\branches-and-versioning.md";
+        var mkdocs_page_url = "/git/branches-and-versioning/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> WoEN: Software documentation
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Домашняя страница</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../commits/">Git: Оформление коммитов</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Git: Ветки и версионирование</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1">1. Типы веток</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-c">2. Cлияние веток</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#merge">Merge</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rebase">Rebase</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">Какой тип слияния выбрать?</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#rebase_1">Rebase</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#merge_1">Merge</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3">3. Правила работы с ветками</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4">4. Версионирование</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../pull-request/">Git: Pull Request и код-ревью</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../code-style/">Правила оформления кода</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">WoEN: Software documentation</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Git: Ветки и версионирование</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="git">Git: Ветки и версионирование</h1>
+<p>Ветки (<code>branch</code>) - очень мощный инструмент в Git.
+Они позволяют разделять и соединять между собой разные направления разработки:
+стабильную версию, новые идеи/наработки, исправления багов. <br></p>
+<h2 id="1">1. Типы веток</h2>
+<ul>
+<li>
+<p><code>master</code> - Стабильная версия (Release). В этой ветке содержатся
+  только коммиты, прошедшие экспертизу и проверенные на железе.</p>
+</li>
+<li>
+<p><code>develop</code> - Ветка для разработки (Beta). В этой ветке ведется большая часть разработки.
+  Должна основываться на <code>master</code> (содержать в себе все коммиты оттуда). При внесении изменений в <code>master</code>
+  они должны быть перенесены в начало <code>develop</code> через <a href="https://www.atlassian.com/git/tutorials/rewriting-history/git-rebase">git rebase</a>.
+  По завершении работы коммиты из <code>develop</code> переносятся в <code>master</code> путем открытия <em>Pull Request</em> <br>
+  <strong>NB</strong>: Не смотря на то, что это <code>develop</code>, программный код должен проверяться и соответствовать правилам оформления.</p>
+</li>
+<li>
+<p>Экспериментальные ветки (Experimental/Feature). Содержат в себе экспериментальные изменения, пока не достойные основных веток.
+  Основывается на <code>develop</code>, по завершении работы переносится в <code>develop</code> и закрывается. <br>
+  До закрытия ветки особых требований к программному коду нет.</p>
+</li>
+</ul>
+<h2 id="2-c">2. Cлияние веток</h2>
+<p>Git предполагает два типа слияния веток: <strong>Merge</strong> и <strong>Rebase</strong></p>
+<p>Предположим, у нас есть основная ветка <code>main</code> и ветка
+<code>feature</code>, которая начинается от коммита <code>B</code>, в которой мы работаем. </p>
+<pre><code>A---B---C---D   (main-ветка)
+     \       
+      E---F---G (feature-ветка)
+</code></pre>
+<p>Пока мы работали над <code>feature</code>, ветка <code>main</code> ушла вперед. Там содержатся очень
+важные изменения, которые мы хотим иметь в своей ветке.</p>
+<h3 id="merge">Merge</h3>
+<pre><code class="language-shell">git checkout feature # Перейти в ветку feature
+git merge master     # Сделать merge master в рабочую ветку
+</code></pre>
+<p><code>git merge master</code> применит изменения, сделанные в ветке <code>master</code> с тех пор, как 
+она начала отличаться от <code>feature</code> (то есть коммиты <code>C</code>, <code>D</code>), поверх ветки
+<code>feature</code>. Это приведет к появлению нового коммита <code>H</code>, объединяющего две ветки:</p>
+<pre><code>A---B-----C-----D   (main-ветка)
+     \           \  
+      E---F---G---H (feature-ветка)
+</code></pre>
+<p>Достоинства:</p>
+<ul>
+<li>Мы совершили слияние двух веток, не меняя историю в прошлом. <br>
+Это означает, что merge - более <strong>безопасная</strong> операция, которая не испортит жизнь
+другим людям, работающим над той веток, потому что <strong>не меняет историю</strong>.</li>
+</ul>
+<p>Недостатки:</p>
+<ul>
+<li>Создается лишний коммит, по сути не несущий в себе новой информации</li>
+<li>Если ветки сильно отличаются и при слиянии возникли конфликты, то их
+придется разрешать все сразу. <br>
+Это означает, что merge может <strong>усложнить историю</strong>, а процесс слияния веток становится
+<strong>менее интуитивным</strong>.</li>
+</ul>
+<h3 id="rebase">Rebase</h3>
+<pre><code class="language-shell">git checkout feature # Перейти в ветку feature
+git rebase master    # Сделать rebase рабочей ветки поверх master
+</code></pre>
+<p><code>git rebase master</code> выкинет все коммиты в ветке <code>feature</code> (<code>E</code>, <code>F</code>, <code>G</code>) с тех пор,
+как она ушла от ветки <code>master</code> (коммит <code>B</code>) и вновь применит их поверх
+конца ветки <code>master</code> (коммит <code>D</code>). В итоге ветка <code>feature</code> будет выглядеть, как будто
+её начали не от коммита <code>B</code>, а от коммита <code>D</code>. Мы <strong>подменили основание ветки</strong>.</p>
+<pre><code>A---B---C---D              (main-ветка)
+             \  
+              E*---F*---G* (feature-ветка)
+</code></pre>
+<p>Обратите внимание, что коммиты (<code>E</code>, <code>F</code>, <code>G</code>) и (<code>E*</code>, <code>F*</code>, <code>G*</code>) - не то же самое!
+У них разное основание, а, может, и содержание.</p>
+<p>Достоинства:</p>
+<ul>
+<li>История более линейная. Мы забыли, что ветка <code>feature</code> когда-то основывалась на <code>B</code>.</li>
+<li>Не порождаются новые коммиты</li>
+<li>Если возникают конфликты при слиянии, то они будут разрешаться по очереди, редактируя
+каждый коммит (<code>E</code>, <code>F</code>, <code>G</code>) по отдельности. <br>
+Это означает, что rebase позволяет иметь более прозрачную и читаемую историю.</li>
+</ul>
+<p>Недостатки:
+* <strong>Мы меняем историю!</strong> Если кто-то другой работал с веткой <code>feature</code>, пока мы сделали
+её rebase, то это приведет к проблемам, так как у другого человека в рабочем пространстве
+будут коммиты, которых теперь не существует
+* <strong>Мы меняем историю!</strong> И редактируем все коммиты в истории. Если быть неаккуратным, 
+то можно потерять какой-нибудь коммит
+* Могут возникнуть проблемы с тем, что бы запушить ветку после rebase. Чаще всего мы двигаем
+историю вперед, а право на изменение истории в прошлом есть только у администраторов.
+для этого используется <code>git push --force</code>.<br>
+Это означает, что <strong>rebase</strong> - опасная операция, которая может испортить историю и создать
+проблемы, если над одной веткой работают несколько человек</p>
+<h3 id="_1">Какой тип слияния выбрать?</h3>
+<h4 id="rebase_1">Rebase</h4>
+<ol>
+<li>Когда нужна более чистая и читаемая история</li>
+<li>Когда необходимо изменить историю задним числом</li>
+<li>Когда нужно синхронизировать рабочую ветку с изменениями,
+произошедшими в основной ветке.</li>
+</ol>
+<p>Идеально подходит для веток, над которой работает один человек. В том числе для
+слияния удаленной ветки в локальную (например <code>origin/develop</code> в <code>develop</code>).</p>
+<h4 id="merge_1">Merge</h4>
+<ol>
+<li>Когда изменение истории недопустимо</li>
+<li>Когда нужна более детализированная история</li>
+<li>Когда необходимо применить изменения из рабочей ветки в основную</li>
+</ol>
+<p>Идеально подходит для веток, с которой работают сразу несколько человек.</p>
+<h2 id="3">3. Правила работы с ветками</h2>
+<ol>
+<li>
+<p>Недопустимо использовать <strong>merge</strong> для слияния удаленных веток (<code>remote</code>) в локальные. 
+В таких случаях необходимо использовать rebase
+<img alt="Rebase в Android Studio" src="../rebase-android-studio.png" /></p>
+</li>
+<li>
+<p>Ветка <code>master</code> - главная. Изменения в ней появляются только в результате слияния с другой веткой через <em>pull request</em>. 
+Коммиты напрямую в <code>master</code> недопустимы.</p>
+</li>
+<li>
+<p>Каждый <strong>merge</strong> в ветку <code>master</code> - выпуск новой версии.</p>
+</li>
+<li>
+<p>От ветки <code>develop</code> допускается создавать <code>feature</code>-ветки, под
+конкретные задачи.</p>
+</li>
+<li>
+<p>Название <code>feature</code>-ветки должно соответствовать задаче, которую она
+решает.</p>
+</li>
+<li>
+<p>Над <code>feature</code>-веткой одновременно работает только один человек.</p>
+</li>
+<li>
+<p>В конце работы над <code>feature</code> она сливается с <code>develop</code> через <em>pull request</em>.
+После этого ветка закрывается.</p>
+</li>
+<li>
+<p>Перед слиянием ветки <code>B</code> в ветку <code>A</code> ветка <code>B</code> должна содержать в себе
+все коммиты из <code>A</code>. Таким образом, слияние веток можно осуществить посредством т.н.
+<strong>fast-forward merge</strong>, когда коммиты из <code>B</code> линейно применяются к <code>А</code>:</p>
+</li>
+</ol>
+<pre><code>---A     main (A)
+    \
+     B   feature (B)
+
+После слияния:
+
+---A---B main (A)
+</code></pre>
+<h2 id="4">4. Версионирование</h2>
+<p>Предлагается следующая схема версионирования: <br></p>
+<pre><code>v&lt;Мажорная версия&gt;.&lt;Минорная версия&gt;
+</code></pre>
+<ul>
+<li>
+<p>Каждый раз, когда вносятся изменения в <code>master</code>, номер версии увеличивается.</p>
+</li>
+<li>
+<p>К каждому существенному мероприятию (начало сезона, встреча, сорвенования),
+  должна быть готова новая  <strong>Мажорная</strong> версия</p>
+</li>
+<li>
+<p>Версия может увеличиваться и между мероприятиями. В таком случае выходит <strong>Минорная</strong> версия</p>
+</li>
+<li>
+<p>Первая версия - <code>v0.0</code></p>
+</li>
+</ul>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../commits/" class="btn btn-neutral float-left" title="Git: Оформление коммитов"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../pull-request/" class="btn btn-neutral float-right" title="Git: Pull Request и код-ревью">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../commits/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../pull-request/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
