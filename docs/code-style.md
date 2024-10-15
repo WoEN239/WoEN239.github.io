@@ -46,6 +46,12 @@ static final int ROBOT_WIDTH_CM = 25;
 
 См. правила для Java
 
+### Структура файла
+
+```kotlin
+// TODO
+```
+
 ### Документация
 
 В стиле KDoc на русском языке
