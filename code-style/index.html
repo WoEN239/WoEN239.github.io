@@ -59,6 +59,30 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Правила оформления кода</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#java">Java</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">Отступы и пробелы</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">Названия символов</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">Структура файла</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">Документация</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#kotlin">Kotlin</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">Отступы и пробелы</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_7">Названия символов</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_8">Структура файла</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_9">Документация</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -86,8 +110,41 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="_1">Правила оформления кода</h1>
+<h2 id="java">Java</h2>
+<h3 id="_2">Отступы и пробелы</h3>
+<p>В соответствии со стандарными настройками Android Studio</p>
+<h3 id="_3">Названия символов</h3>
+<p>Регистр:</p>
+<ul>
+<li><strong>Пакеты (папки)</strong> - одна папка-одно слово <code>lowercase</code></li>
+<li><strong>Классы (в т.ч. интерфейсы)</strong> - <code>UpperCamelCase</code></li>
+<li><strong>Методы (функции)</strong> - <code>lowerCamelCase</code></li>
+<li><strong>Константы (<code>static final</code>)</strong> - <code>SCREAMING_SNAKE_CASE</code>.</li>
+</ul>
+<p>Прочие правила</p>
+<ul>
+<li>Использование нижних подчеркиваний (<code>_</code>) за исключением констант не допускается.</li>
+<li>Название символов оформляется английскими словами, на английском языке.</li>
+<li>Если у символа есть размерность, её необходимо обозначить в конце названия:</li>
+</ul>
+<pre><code class="language-java">void getHeightMeters();
+static final int ROBOT_WIDTH_CM = 25;
+</code></pre>
+<h3 id="_4">Структура файла</h3>
 <pre><code class="language-java">// TODO
 </code></pre>
+<h3 id="_5">Документация</h3>
+<p>В стиле JavaDoc на русском языке</p>
+<h2 id="kotlin">Kotlin</h2>
+<h3 id="_6">Отступы и пробелы</h3>
+<p>В соответствии со стандарными настройками Android Studio</p>
+<h3 id="_7">Названия символов</h3>
+<p>См. правила для Java</p>
+<h3 id="_8">Структура файла</h3>
+<pre><code class="language-kotlin">// TODO
+</code></pre>
+<h3 id="_9">Документация</h3>
+<p>В стиле KDoc на русском языке</p>
               
             </div>
           </div><footer>

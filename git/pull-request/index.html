@@ -55,6 +55,14 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Git: Pull Request и код-ревью</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Краткое описание процесса</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#1-pull-request">1. Открытие Pull Request</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-">2. Код-ревью</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-c">3. Cлияние веток</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -86,8 +94,102 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="git-pull-request-">Git: Pull Request и код-ревью</h1>
-<pre><code class="language-java">//TODO
+<p>С каждым релизом новой версии и при интеграции <code>feature</code>-веток
+предлагается проходить процедуру код-ревью. Для этого можно
+воспользоваться инструментом <strong>Pull Request</strong> на GitHub, позволяющим
+осуществлять слияние веток только после стороннего аудита (просмотра) кода.</p>
+<p>Возможные слияния веток:</p>
+<ul>
+<li>
+<p><code>develop</code> &lt;- <code>feature</code> <br>
+Один раз, после этого <code>feature</code>-ветка удаляется. Под очередной PR
+создается новая ветка.</p>
+</li>
+<li>
+<p><code>master</code> &lt;- <code>develop</code> <br>
+Несколько раз, под каждый релиз.</p>
+</li>
+</ul>
+<h3 id="_1">Краткое описание процесса</h3>
+<ol>
+<li>Программисты создают коммиты в рабочей ветке</li>
+<li>Когда результат готов, программисты создают <strong>Pull request</strong></li>
+<li>Ответственными (<strong>Assignees</strong>) назначаются программисты,
+аудиторами (<strong>Reviewers</strong>) - преподаватели</li>
+<li>(<strong>Reviewers</strong>) дают замечания по написанному коду</li>
+<li>(<strong>Assignees</strong>) исправляют замечания, создают новые коммиты</li>
+<li>(<strong>Reviewers</strong>) фиксируют исправления замечаний и закрывают <strong>Pull request</strong>.</li>
+</ol>
+<h2 id="1-pull-request">1. Открытие Pull Request</h2>
+<p>Переходим в наш репозиторий, открываем вкладку <strong>Pull requests</strong>. <br>
+Нажимаем <strong>New pull request</strong>.</p>
+<p><img alt="pull-request-open.png" src="../pull-request-open.png" /></p>
+<p>Выбираем ветки для слияния:</p>
+<ul>
+<li><strong>base</strong> - <em>Куда</em> сливаем, главная ветка</li>
+<li><strong>compare</strong> - <em>Что</em> сливаем, рабочая ветка (наша)</li>
+</ul>
+<p>После выбора будут показаны коммиты, которые впоследствии будут добавлены к
+<strong>base</strong> ветке. Также необходимо убедиться, что ветки можно сливать - 
+в <strong>feature</strong> должны быть все коммиты из <strong>base</strong>.</p>
+<p>Наконец, нажимаем <strong>Create pull request</strong></p>
+<p><img alt="pull-request-compare.png" src="../pull-request-compare.png" /></p>
+<p>Теперь необходимо написать название и описание <strong>pull request</strong>.</p>
+<p>Формат названия (<strong>title</strong>):</p>
+<ul>
+<li>Для релиза (<code>master</code> &lt;- <code>develop</code>):</li>
+</ul>
+<pre><code>WoEN: &lt;название_команды&gt; &lt;Название_сезона&gt; v&lt;версия&gt;
 </code></pre>
+<ul>
+<li>Для фичи (<code>develop</code> &lt;- <code>feature</code>):</li>
+</ul>
+<pre><code>&lt;название_фичи&gt;
+</code></pre>
+<p>Описание (<strong>description</strong>) - в свободной форме, с кратким описанием того,
+что добавилось/удалилось/изменилось.</p>
+<hr />
+<p>Также необходимо указать ответственных людей:</p>
+<ul>
+<li><strong>Assignees</strong> - Люди, ответственные за написанный в ветке код. <br> 
+(Среди них должен быть сам автор <strong>Pull request</strong>)</li>
+<li><strong>Reviewers</strong> - Люди, которые будут осуществлять код-ревью. <br>
+(Среди них должны быть преподаватели - как минимум <code>@oaleksander</code>)</li>
+</ul>
+<p>После этого можно нажимать <strong>Create pull request</strong>.</p>
+<p><img alt="pull-request-description.png" src="../pull-request-description.png" /></p>
+<h2 id="2-">2. Код-ревью</h2>
+<p>После открытия <strong>Pull request</strong> будет доступна соответствующая страница на
+GitHub, где <strong>Reviewers</strong> могут оставлять комментарии по поводу написанного
+<strong>Assignees</strong> кода.</p>
+<ul>
+<li>
+<p>Задача <strong>Reviewers</strong>: внимательно просмотреть все коммиты и дать замечания.</p>
+</li>
+<li>
+<p>Задача <strong>Assignees</strong>: исправить замечания, либо объяснить, почему приняты именно такие решения.</p>
+</li>
+</ul>
+<p><strong>Reviewer</strong> создает ветки дискуссии, выделяя конкретный участок кода. <br>
+<strong>Assignee</strong> может дать ответ замечаниям <strong>Reviewer</strong> в этой же ветке.</p>
+<p><img alt="pull-request-discussion.png" src="../pull-request-discussion.png" /></p>
+<p>В случае, если <strong>Assignee</strong> принял замечания, он должен их исправить через
+новый коммит в рабочей ветке. 
+(Кстати, на такой случай можно использовать тип коммита <code>chore</code>).</p>
+<p>После добавления коммита он будет отражен в дискуссии <strong>Pull request</strong>.
+Но можно также отдельно оповестить <strong>Reviewer</strong> (<code>@</code>) в соответствующей дискуссии,
+что его замечания исправлены.</p>
+<p><img alt="pull-request-fix.png" src="../pull-request-fix.png" /></p>
+<h2 id="3-c">3. Cлияние веток</h2>
+<p>Необходимые условия для слияния веток:</p>
+<ol>
+<li>Все <strong>дискуссии</strong> закрыты (<strong>resolved</strong>).</li>
+<li>У рабочей ветки <strong>нет конфликтов</strong> с целевой.</li>
+<li>Последний коммит в целевой ветке проходит <strong>pipeline</strong> (проект собирается).</li>
+</ol>
+<p><img alt="pull-request-resolved.png" src="../pull-request-resolved.png" /></p>
+<p>После выполнения необходимых условий один из <strong>Reviewers</strong> осуществляет
+слияние веток. После этого <strong>Pull request</strong> считается закрытым.</p>
               
             </div>
           </div><footer>
